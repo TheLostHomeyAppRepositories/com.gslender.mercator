@@ -1,0 +1,13 @@
+{
+  "name": "com.gslender.mercator",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {},
+  "devDependencies": {
+    "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.5"
+  },
+  "dependencies": {
+    "homey-zigbeedriver": "^2.1.4",
+    "zigbee-clusters": "^2.3.0"
+  }
+}

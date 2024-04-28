@@ -1,2 +1,3 @@
-# com.gslender.mercator
-Homey App for the Mercator Ikuü range of Zigbee devices
+# Mercator Ikuu
+
+Zigbee Drivers for Mercator Ikuu range of devices

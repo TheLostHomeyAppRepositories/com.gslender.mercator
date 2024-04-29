@@ -13,10 +13,24 @@ class FanLightDevice extends ZigBeeDevice {
   async onNodeInit({ zclNode }) {
     this.log('FanLightDevice has been initialized');
 
-    this.registerCapability("onoff", CLUSTER.ON_OFF);
+    this.registerCapability("onoff", CLUSTER.ON_OFF, {
+      reportOpts: {
+        configureAttributeReporting: {
+          minInterval: 0, 
+          maxInterval: 300, 
+          minChange: 1, 
+        },
+      },
+    });
 
-    this.registerCapability("fanspeed", IkuuFanSpeedCluster);
+    this.registerCapability("fanspeed", IkuuFanSpeedCluster, {
+      setSpeed: async (value) => {
+        this.log('FanLightDevice setSpeed',value);
+      }
+    });
 
+    // this.registerCapabilityListener("fanspeed",)
+    
   }
 }
 

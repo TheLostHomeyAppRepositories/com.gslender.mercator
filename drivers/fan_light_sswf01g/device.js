@@ -1,57 +1,23 @@
 'use strict';
 
 const { ZigBeeDevice } = require("homey-zigbeedriver");
-const { debug } = require("zigbee-clusters");
+const { ZCLNode, CLUSTER, debug } = require('zigbee-clusters');
 
 // Enable debug logging of all relevant Zigbee communication
 debug(true);
 
-// const { Device } = require('homey');
+const IkuuFanSpeedCluster = require('../../lib/IkuuFanSpeedCluster');
 
 class FanLightDevice extends ZigBeeDevice {
 
-  /**
-   * onInit is called when the device is initialized.
-   */
-  async onInit() {
+  async onNodeInit({ zclNode }) {
     this.log('FanLightDevice has been initialized');
-  }
 
-  /**
-   * onAdded is called when the user adds the device, called just after pairing.
-   */
-  async onAdded() {
-    this.log('FanLightDevice has been added');
-  }
+    this.registerCapability("onoff", CLUSTER.ON_OFF);
 
-  /**
-   * onSettings is called when the user updates the device's settings.
-   * @param {object} event the onSettings event data
-   * @param {object} event.oldSettings The old settings object
-   * @param {object} event.newSettings The new settings object
-   * @param {string[]} event.changedKeys An array of keys changed since the previous version
-   * @returns {Promise<string|void>} return a custom message that will be displayed
-   */
-  async onSettings({ oldSettings, newSettings, changedKeys }) {
-    this.log('FanLightDevice settings where changed');
-  }
+    this.registerCapability("fanspeed", IkuuFanSpeedCluster);
 
-  /**
-   * onRenamed is called when the user updates the device's name.
-   * This method can be used this to synchronise the name to the device.
-   * @param {string} name The new name
-   */
-  async onRenamed(name) {
-    this.log('FanLightDevice was renamed');
   }
-
-  /**
-   * onDeleted is called when the user deleted the device.
-   */
-  async onDeleted() {
-    this.log('FanLightDevice has been deleted');
-  }
-
 }
 
 module.exports = FanLightDevice;

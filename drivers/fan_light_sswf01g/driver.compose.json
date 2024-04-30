@@ -21,5 +21,9 @@
   ],
   "connectivity": [
     "zigbee"
-  ]
+  ],
+  "images": {
+    "small": "/drivers/fan_light_sswf01g/assets/images/small.png",
+    "large": "/drivers/fan_light_sswf01g/assets/images/large.png"
+  }
 }

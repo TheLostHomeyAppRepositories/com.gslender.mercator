@@ -38,6 +38,5 @@
     "getable": true,
     "setable": true,
     "uiComponent": "picker",
-    "uiQuickAction": true,
-    "icon": "/assets/fan_speed.svg"
+    "uiQuickAction": true
 }

@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
+  "brandColor": "#dab30c",
   "platforms": [
     "local"
   ],
@@ -19,8 +20,7 @@
   "permissions": [],
   "images": {
     "small": "/assets/images/small.png",
-    "large": "/assets/images/large.png",
-    "xlarge": "/assets/images/xlarge.png"
+    "large": "/assets/images/large.png"
   },
   "author": {
     "name": "Grant Slender",
@@ -66,6 +66,10 @@
       "connectivity": [
         "zigbee"
       ],
+      "images": {
+        "small": "/drivers/fan_light_sswf01g/assets/images/small.png",
+        "large": "/drivers/fan_light_sswf01g/assets/images/large.png"
+      },
       "id": "fan_light_sswf01g"
     }
   ],
@@ -110,8 +114,7 @@
       "getable": true,
       "setable": true,
       "uiComponent": "picker",
-      "uiQuickAction": true,
-      "icon": "/assets/fan_speed.svg"
+      "uiQuickAction": true
     }
   }
 }

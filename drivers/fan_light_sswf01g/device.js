@@ -34,18 +34,18 @@ class FanLightDevice extends ZigBeeDevice {
     this.registerCapability("onoff", CLUSTER.ON_OFF, {
       reportOpts: {
         configureAttributeReporting: {
-          minInterval: 0, 
-          maxInterval: 300, 
-          minChange: 1, 
+          minInterval: 0,
+          maxInterval: 300,
+          minChange: 1,
         },
       },
     });
 
-    this.registerCapabilityListener("fanspeed",async (value, opts) => {
-      await zclNode.endpoints[1].clusters[IkuuFanSpeedCluster.NAME].writeAttributes({speed:getSpeedValue(value)});
+    this.registerCapabilityListener("fanspeed", async (value, opts) => {
+      await zclNode.endpoints[1].clusters[IkuuFanSpeedCluster.NAME].writeAttributes({ speed: getSpeedValue(value) });
     });
 
-     await zclNode.endpoints[1].clusters[IkuuFanSpeedCluster.NAME].configureReporting({
+    await zclNode.endpoints[1].clusters[IkuuFanSpeedCluster.NAME].configureReporting({
       speed: {
         minInterval: 0,
         maxInterval: 300,
@@ -56,11 +56,11 @@ class FanLightDevice extends ZigBeeDevice {
     zclNode.endpoints[1].clusters[IkuuFanSpeedCluster.NAME].on(
       "attr.speed",
       (value) => {
-        this.setCapabilityValue("fanspeed",value);
+        this.setCapabilityValue("fanspeed", value);
       }
     );
 
-    
+
   }
 }
 

@@ -71,6 +71,61 @@
         "large": "/drivers/fan_light_sswf01g/assets/images/large.png"
       },
       "id": "fan_light_sswf01g"
+    },
+    {
+      "name": {
+        "en": "Light Dimmer"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "opts": {
+            "duration": true
+          }
+        },
+        "onoff": {
+          "setOnDim": false
+        }
+      },
+      "zigbee": {
+        "manufacturerName": "_TZE200_swaamsoy",
+        "productId": [
+          "TS0601"
+        ],
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              6,
+              8,
+              768,
+              61184
+            ],
+            "bindings": [
+              25,
+              10
+            ]
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "images": {
+        "small": "/drivers/light_dimmer_sswd01/assets/images/small.png",
+        "large": "/drivers/light_dimmer_sswd01/assets/images/large.png"
+      },
+      "id": "light_dimmer_sswd01"
     }
   ],
   "capabilities": {

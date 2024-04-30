@@ -96,6 +96,12 @@
           "title": {
             "en": "High"
           }
+        },
+        {
+          "id": "on",
+          "title": {
+            "en": "On"
+          }
         }
       ],
       "title": {

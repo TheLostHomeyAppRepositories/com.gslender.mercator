@@ -31,6 +31,11 @@ class FanLightDevice extends ZigBeeDevice {
 
     this.log('FanLightDevice has been initialized');
 
+    const switchFanToAction = this.homey.flow.getActionCard('switch-fan-to');
+    switchFanToAction.registerRunListener(async (args, state) => {
+      await zclNode.endpoints[1].clusters[IkuuFanSpeedCluster.NAME].writeAttributes({ speed: getSpeedValue(args) });
+    });
+
     this.registerCapability("onoff", CLUSTER.ON_OFF, {
       reportOpts: {
         configureAttributeReporting: {
@@ -41,8 +46,16 @@ class FanLightDevice extends ZigBeeDevice {
       },
     });
 
+    let _device = this; // We're in a Device instance
+
     this.registerCapabilityListener("fanspeed", async (value, opts) => {
       await zclNode.endpoints[1].clusters[IkuuFanSpeedCluster.NAME].writeAttributes({ speed: getSpeedValue(value) });
+      if (value === 'off') {
+        _device.driver.triggerFanOff(_device);
+        
+      } else {
+        _device.driver.triggerFanOn(_device);
+      }
     });
 
     await zclNode.endpoints[1].clusters[IkuuFanSpeedCluster.NAME].configureReporting({
@@ -52,11 +65,17 @@ class FanLightDevice extends ZigBeeDevice {
         minChange: 1,
       },
     });
-
+    
     zclNode.endpoints[1].clusters[IkuuFanSpeedCluster.NAME].on(
       "attr.speed",
       (value) => {
-        this.setCapabilityValue("fanspeed", value);
+        _device.setCapabilityValue("fanspeed", value);
+        if (value === 'off') {
+          _device.driver.triggerFanOff(_device);
+          
+        } else {
+          _device.driver.triggerFanOn(_device);
+        }
       }
     );
 

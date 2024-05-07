@@ -1,0 +1,68 @@
+{
+    "triggers": [
+        {
+            "id": "fan-on",
+            "title": {
+                "en": "Fan On"
+            },
+            "hint": {
+                "en": "Fan is switched on"
+            }
+        },
+        {
+            "id": "fan-off",
+            "title": {
+                "en": "Fan Off"
+            },
+            "hint": {
+                "en": "Fan is switched off"
+            }
+        }
+    ],
+    "actions": [
+        {
+            "id": "switch-fan-to",
+            "title": {
+                "en": "Switch Fan To"
+            },
+            "titleFormatted": {
+                "en": "Switch Fan To [[Speed]]"
+            },
+            "hint": {
+                "en": "Switch the Fan to..."
+            },
+            "args": [
+                {
+                    "type": "dropdown",
+                    "name": "Speed",
+                    "values": [
+                        {
+                            "id": "off",
+                            "label": {
+                                "en": "Off"
+                            }
+                        },
+                        {
+                            "id": "high",
+                            "label": {
+                                "en": "High"
+                            }
+                        },
+                        {
+                            "id": "medium",
+                            "label": {
+                                "en": "Medium"
+                            }
+                        },
+                        {
+                            "id": "low",
+                            "label": {
+                                "en": "Low"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

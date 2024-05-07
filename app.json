@@ -12,7 +12,7 @@
     "en": "Mercator Ikuü"
   },
   "description": {
-    "en": "Zigbee Drivers for Mercator Ikuü range of devices"
+    "en": "Introducing Mercator Ikuü - There has never been a better time to automate your home. Mercator Ikuü is an Australian-owned brand offering smart home products that are simple to install, quick to set up and easy to use. The intuitively designed app and broad range of luxury products provide a convenient way to create an entirely personalised system."
   },
   "category": [
     "lights"
@@ -25,6 +25,93 @@
   "author": {
     "name": "Grant Slender",
     "email": "gslender@gmail.com"
+  },
+  "flow": {
+    "triggers": [
+      {
+        "id": "fan-on",
+        "title": {
+          "en": "Fan On"
+        },
+        "hint": {
+          "en": "Fan is switched on"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan_light_sswf01g"
+          }
+        ]
+      },
+      {
+        "id": "fan-off",
+        "title": {
+          "en": "Fan Off"
+        },
+        "hint": {
+          "en": "Fan is switched off"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan_light_sswf01g"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "switch-fan-to",
+        "title": {
+          "en": "Switch Fan To"
+        },
+        "titleFormatted": {
+          "en": "Switch Fan To [[Speed]]"
+        },
+        "hint": {
+          "en": "Switch the Fan to..."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan_light_sswf01g"
+          },
+          {
+            "type": "dropdown",
+            "name": "Speed",
+            "values": [
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "high",
+                "label": {
+                  "en": "High"
+                }
+              },
+              {
+                "id": "medium",
+                "label": {
+                  "en": "Medium"
+                }
+              },
+              {
+                "id": "low",
+                "label": {
+                  "en": "Low"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   "drivers": [
     {

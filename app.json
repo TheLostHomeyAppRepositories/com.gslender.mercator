@@ -12,7 +12,7 @@
     "en": "Mercator Ikuü"
   },
   "description": {
-    "en": "Introducing Mercator Ikuü - There has never been a better time to automate your home."
+    "en": "There has never been a better time to automate your home."
   },
   "category": [
     "lights"
@@ -26,6 +26,473 @@
     "name": "Grant Slender",
     "email": "gslender@gmail.com"
   },
+  "source": "https://github.com/gslender/com.gslender.mercator",
+  "bugs": {
+    "url": "https://github.com/gslender/com.gslender.mercator/issues"
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Double Power Point"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff",
+        "measure_power",
+        "meter_power",
+        "measure_current",
+        "measure_voltage"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "approximated": true
+        }
+      },
+      "zigbee": {
+        "manufacturerName": "_TZ3210_pfbzs1an",
+        "productId": [
+          "TS011F"
+        ],
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              4,
+              5,
+              6,
+              1794,
+              2820
+            ],
+            "bindings": [
+              6,
+              1794,
+              2820
+            ]
+          },
+          "2": {
+            "clusters": [
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          }
+        },
+        "devices": {
+          "secondSocket": {
+            "class": "socket",
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Double Power Point"
+            }
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "images": {
+        "large": "/drivers/double_power_point_spp02g/assets/images/large.png",
+        "small": "/drivers/double_power_point_spp02g/assets/images/small.png"
+      },
+      "id": "double_power_point_spp02g",
+      "settings": [
+        {
+          "id": "metering_offset",
+          "type": "number",
+          "label": {
+            "en": "Metering Correction Factor"
+          },
+          "hint": {
+            "en": "Set a value to compensate if you experience that the Metered Power is not correct.\nRange: 0.8 - 1.2, step size 0.1, \ndefault: 1"
+          },
+          "value": 1,
+          "attr": {
+            "min": 0.8,
+            "max": 1.2,
+            "step": 0.1
+          }
+        },
+        {
+          "id": "measure_offset",
+          "type": "number",
+          "label": {
+            "en": "Measure Correction Factor"
+          },
+          "hint": {
+            "en": "Set a value to compensate if you experience that the Measured Power is not correct.\nRange: 0.8 - 1.2, step size 0.1, \ndefault: 1"
+          },
+          "value": 1,
+          "attr": {
+            "min": 0.8,
+            "max": 1.2,
+            "step": 0.1
+          }
+        },
+        {
+          "id": "minReportPower",
+          "type": "number",
+          "label": {
+            "en": "Min report interval for power (s)"
+          },
+          "hint": {
+            "en": "Min interval before a report is sent to Homey (s)"
+          },
+          "value": 60,
+          "attr": {
+            "step": 1,
+            "min": 10,
+            "max": 86400
+          }
+        },
+        {
+          "id": "minReportCurrent",
+          "type": "number",
+          "label": {
+            "en": "Min report interval for current (s)"
+          },
+          "hint": {
+            "en": "Min interval before a report is sent to Homey (s)"
+          },
+          "value": 60,
+          "attr": {
+            "step": 1,
+            "min": 10,
+            "max": 86400
+          }
+        },
+        {
+          "id": "minReportVoltage",
+          "type": "number",
+          "label": {
+            "en": "Min report interval for voltage (s)"
+          },
+          "hint": {
+            "en": "Min interval before a report is sent to Homey (s)"
+          },
+          "value": 60,
+          "attr": {
+            "step": 1,
+            "min": 10,
+            "max": 86400
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "Light Fan Controller"
+      },
+      "class": "fan",
+      "capabilities": [
+        "onoff",
+        "fanspeed"
+      ],
+      "zigbee": {
+        "manufacturerName": "_TZ3210_lzqq3u4r",
+        "productId": [
+          "TS0501"
+        ],
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              6,
+              514,
+              61184
+            ],
+            "bindings": [
+              6,
+              514,
+              10
+            ]
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "images": {
+        "small": "/drivers/fan_light_sswf01g/assets/images/small.png",
+        "large": "/drivers/fan_light_sswf01g/assets/images/large.png"
+      },
+      "id": "fan_light_sswf01g"
+    },
+    {
+      "name": {
+        "en": "Light Dimmer"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "opts": {
+            "duration": true
+          }
+        },
+        "onoff": {
+          "setOnDim": false
+        }
+      },
+      "zigbee": {
+        "manufacturerName": "_TZE200_swaamsoy",
+        "productId": [
+          "TS0601"
+        ],
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              4,
+              5,
+              61184
+            ],
+            "bindings": [
+              25,
+              10
+            ]
+          }
+        }
+      },
+      "energy": {
+        "approximation": {
+          "usageOn": 0,
+          "usageOff": 0
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "images": {
+        "large": "/drivers/light_dimmer_sswd01/assets/images/large.png",
+        "small": "/drivers/light_dimmer_sswd01/assets/images/small.png"
+      },
+      "id": "light_dimmer_sswd01"
+    },
+    {
+      "name": {
+        "en": "Quad Light Switch"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "_TZ3210_pfbzs1an",
+        "productId": [
+          "TS0014"
+        ],
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "2": {
+            "clusters": [
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "3": {
+            "clusters": [
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "4": {
+            "clusters": [
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          }
+        },
+        "devices": {
+          "secondLight": {
+            "class": "light",
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Quad Light Switch"
+            }
+          },
+          "thirdLight": {
+            "class": "light",
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Quad Light Switch"
+            }
+          },
+          "fourthLight": {
+            "class": "light",
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Quad Light Switch"
+            }
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "images": {
+        "large": "/drivers/quad_light_switch_ssw04/assets/images/large.png",
+        "small": "/drivers/quad_light_switch_ssw04/assets/images/small.png"
+      },
+      "id": "quad_light_switch_ssw04"
+    },
+    {
+      "name": {
+        "en": "Single Light Switch"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "_TZ3000_l8fsgo6p",
+        "productId": [
+          "TS0011"
+        ],
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "images": {
+        "large": "/drivers/single_light_switch_ssw01/assets/images/large.png",
+        "small": "/drivers/single_light_switch_ssw01/assets/images/small.png"
+      },
+      "id": "single_light_switch_ssw01"
+    },
+    {
+      "name": {
+        "en": "Triple Light Switch"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "_TZ3000_khtlvdfc",
+        "productId": [
+          "TS0013"
+        ],
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "2": {
+            "clusters": [
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "3": {
+            "clusters": [
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          }
+        },
+        "devices": {
+          "secondLight": {
+            "class": "light",
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Triple Light Switch"
+            }
+          },
+          "thirdLight": {
+            "class": "light",
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Triple Light Switch"
+            }
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "images": {
+        "large": "/drivers/triple_light_switch_ssw03/assets/images/large.png",
+        "small": "/drivers/triple_light_switch_ssw03/assets/images/small.png"
+      },
+      "id": "triple_light_switch_ssw03"
+    }
+  ],
   "flow": {
     "triggers": [
       {
@@ -113,108 +580,6 @@
       }
     ]
   },
-  "drivers": [
-    {
-      "name": {
-        "en": "Light Fan Controller"
-      },
-      "class": "fan",
-      "capabilities": [
-        "onoff",
-        "fanspeed"
-      ],
-      "zigbee": {
-        "manufacturerName": "_TZ3210_lzqq3u4r",
-        "productId": [
-          "TS0501"
-        ],
-        "endpoints": {
-          "1": {
-            "clusters": [
-              0,
-              3,
-              4,
-              5,
-              6,
-              514,
-              61184
-            ],
-            "bindings": [
-              6,
-              514,
-              10
-            ]
-          }
-        }
-      },
-      "platforms": [
-        "local"
-      ],
-      "connectivity": [
-        "zigbee"
-      ],
-      "images": {
-        "small": "/drivers/fan_light_sswf01g/assets/images/small.png",
-        "large": "/drivers/fan_light_sswf01g/assets/images/large.png"
-      },
-      "id": "fan_light_sswf01g"
-    },
-    {
-      "name": {
-        "en": "Light Dimmer"
-      },
-      "class": "light",
-      "capabilities": [
-        "onoff",
-        "dim"
-      ],
-      "capabilitiesOptions": {
-        "dim": {
-          "opts": {
-            "duration": true
-          }
-        },
-        "onoff": {
-          "setOnDim": false
-        }
-      },
-      "zigbee": {
-        "manufacturerName": "_TZE200_swaamsoy",
-        "productId": [
-          "TS0601"
-        ],
-        "endpoints": {
-          "1": {
-            "clusters": [
-              0,
-              3,
-              4,
-              5,
-              6,
-              8,
-              768,
-              61184
-            ],
-            "bindings": [
-              25,
-              10
-            ]
-          }
-        }
-      },
-      "platforms": [
-        "local"
-      ],
-      "connectivity": [
-        "zigbee"
-      ],
-      "images": {
-        "small": "/drivers/light_dimmer_sswd01/assets/images/small.png",
-        "large": "/drivers/light_dimmer_sswd01/assets/images/large.png"
-      },
-      "id": "light_dimmer_sswd01"
-    }
-  ],
   "capabilities": {
     "fanspeed": {
       "type": "enum",

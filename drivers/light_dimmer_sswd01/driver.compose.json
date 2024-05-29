@@ -4,7 +4,8 @@
   },
   "class": "light",
   "capabilities": [
-    "onoff", "dim"
+    "onoff", 
+    "dim"
   ],  
   "capabilitiesOptions": {
     "dim": {
@@ -21,9 +22,15 @@
     "productId": ["TS0601"],
     "endpoints": {
       "1": {
-        "clusters": [0,3,4,5,6,8,768,61184],
-        "bindings": [25,10]
+        "clusters": [0, 4, 5, 61184],
+        "bindings": [25, 10]
       }
+    }
+  },
+  "energy": {
+    "approximation": {
+      "usageOn": 0,
+      "usageOff": 0
     }
   },
   "platforms": [
@@ -33,7 +40,7 @@
     "zigbee"
   ],
   "images": {
-    "small": "/drivers/light_dimmer_sswd01/assets/images/small.png",
-    "large": "/drivers/light_dimmer_sswd01/assets/images/large.png"
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
   }
 }

@@ -1,41 +1,38 @@
 'use strict';
 
 const { ZigBeeDevice } = require("homey-zigbeedriver");
-const { Cluster, debug } = require('zigbee-clusters');
+const { CLUSTER,Cluster, debug } = require('zigbee-clusters');
 const TuyaSpecificCluster = require('../../lib/TuyaSpecificCluster');
 const TuyaSpecificClusterDevice = require("../../lib/TuyaSpecificClusterDevice");
 
 Cluster.addCluster(TuyaSpecificCluster);
 
-class LightDimmerDevice extends TuyaSpecificClusterDevice {
+class SingleLightSwitchDevice extends TuyaSpecificClusterDevice {
 
   async onNodeInit({ zclNode }) {
     await super.onNodeInit({ zclNode });
 
-    this.log('LightDimmerDevice has been initialized');
+    this.log('SingleLightSwitchDevice has been initialized');
 
-    // this.printNode();
-    // debug(true);
+
+    this.registerCapability('onoff', CLUSTER.ON_OFF, { endpoint:  1 });
 
     await zclNode.endpoints[1].clusters.basic.readAttributes(['manufacturerName', 'zclVersion', 'appVersion', 'modelId', 'powerSource', 'attributeReportingStatus'])
     .catch(err => {
         this.error('Error when reading device attributes ', err);
     });
+    // debug(true);
 
-    this.registerCapabilityListener('onoff', async value => {
-      this.log('onoff: ', value);
-      await this.writeBool(1, value);
-    });
+    // this.printNode();
+    // console.log(zclNode.endpoints);
 
-    this.registerCapabilityListener('dim', async value => {
-        this.log("brightness: ", value * 1000);
-        await this.writeData32(2, value * 1000);
-    });
   }
+
 
   onDeleted() {
-    this.log('LightDimmerDevice removed');
+    this.log("SingleLightSwitchDevice removed")
   }
+
 }
 
-module.exports = LightDimmerDevice;
+module.exports = SingleLightSwitchDevice;

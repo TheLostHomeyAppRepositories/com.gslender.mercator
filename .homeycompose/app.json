@@ -11,7 +11,7 @@
     "en": "Mercator Ikuü"
   },
   "description": {
-    "en": "Introducing Mercator Ikuü - There has never been a better time to automate your home."
+    "en": "There has never been a better time to automate your home."
   },
   "category": [
     "lights"
@@ -24,5 +24,9 @@
   "author": {
     "name": "Grant Slender",
     "email": "gslender@gmail.com"
+  },
+  "source": "https://github.com/gslender/com.gslender.mercator",
+  "bugs": {
+    "url": "https://github.com/gslender/com.gslender.mercator/issues"
   }
 }

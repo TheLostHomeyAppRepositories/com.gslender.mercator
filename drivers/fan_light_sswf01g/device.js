@@ -3,9 +3,6 @@
 const { ZigBeeDevice } = require("homey-zigbeedriver");
 const { ZCLNode, CLUSTER, debug } = require('zigbee-clusters');
 
-// Enable debug logging of all relevant Zigbee communication
-// debug(true);
-
 const IkuuFanSpeedCluster = require('../../lib/IkuuFanSpeedCluster');
 
 const SPEEDS = {
@@ -30,6 +27,9 @@ class FanLightDevice extends ZigBeeDevice {
   async onNodeInit({ zclNode }) {
 
     this.log('FanLightDevice has been initialized');
+
+    // this.printNode();
+    // debug(true);
 
     const switchFanToAction = this.homey.flow.getActionCard('switch-fan-to');
     switchFanToAction.registerRunListener(async (args, state) => {
@@ -78,8 +78,10 @@ class FanLightDevice extends ZigBeeDevice {
         }
       }
     );
+  }
 
-
+  onDeleted() {
+    this.log('FanLightDevice removed');
   }
 }
 

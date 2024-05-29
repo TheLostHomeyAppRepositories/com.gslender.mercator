@@ -4,5 +4,8 @@
   },
   "1.0.1": {
     "en": "Update for app store"
+  },
+  "1.1.0": {
+    "en": "Added more devices (Single/Quad/Triple/PowerPoint)"
   }
 }

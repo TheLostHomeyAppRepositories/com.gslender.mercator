@@ -2,13 +2,9 @@
 
 const { ZigBeeDevice } = require("homey-zigbeedriver");
 const { CLUSTER, Cluster, debug } = require('zigbee-clusters');
-const TuyaSpecificCluster = require('../../lib/TuyaSpecificCluster');
-const TuyaSpecificClusterDevice = require("../../lib/TuyaSpecificClusterDevice");
 
-Cluster.addCluster(TuyaSpecificCluster);
-
-class DoublePowerPointDevice extends TuyaSpecificClusterDevice {
-
+class DoublePowerPointDevice extends ZigBeeDevice {
+  
   async onNodeInit({ zclNode }) {
     await super.onNodeInit({ zclNode });
 
@@ -93,24 +89,24 @@ class DoublePowerPointDevice extends TuyaSpecificClusterDevice {
       }
     );
 
-    await zclNode.endpoints[1].clusters[CLUSTER.ELECTRICAL_MEASUREMENT.NAME].configureReporting({});
 
     // meter_power
-    this.registerCapability('meter_power', CLUSTER.METERING, { endpoint: 1 }, {
+    this.registerCapability('meter_power', CLUSTER.METERING, {
       reportParser: value => (value * this.meteringOffset) / 100.0,
-      getParser: value => (value * this.meteringOffset) / 100.0,
+      getParser: value => (value * this.meteringOffset)/100.0,
+      get: 'currentSummationDelivered',
+      report: 'currentSummationDelivered',
       getOpts: {
         getOnStart: true,
-        pollInterval: 300000
-      }
-    });
+        pollInterval: 30000, // in ms
+      },
+     });
 
     // measure_power
-    this.registerCapability('measure_power', CLUSTER.ELECTRICAL_MEASUREMENT, { endpoint: 1 }, {
+    this.registerCapability('measure_power', CLUSTER.ELECTRICAL_MEASUREMENT, {
       reportParser: value => {
-        this.log('measure_power value=', value);
-        // return (value * this.measureOffset) / 100;
-        return value;
+        // this.log('measure_power value=', value);
+        return (value * this.measureOffset) / 100;
       },
       getOpts: {
         getOnStart: true,
@@ -118,11 +114,10 @@ class DoublePowerPointDevice extends TuyaSpecificClusterDevice {
       }
     });
 
-    this.registerCapability('measure_current', CLUSTER.ELECTRICAL_MEASUREMENT, { endpoint: 1 }, {
+    this.registerCapability('measure_current', CLUSTER.ELECTRICAL_MEASUREMENT,  {
       reportParser: value => {
-        this.log('measure_current value=', value);
-        // return value / 1000;
-        return value;
+        // this.log('measure_current value=', value);
+        return value / 1000;
       },
       getOpts: {
         getOnStart: true,
@@ -130,9 +125,9 @@ class DoublePowerPointDevice extends TuyaSpecificClusterDevice {
       }
     });
 
-    this.registerCapability('measure_voltage', CLUSTER.ELECTRICAL_MEASUREMENT, { endpoint: 1 }, {
+    this.registerCapability('measure_voltage', CLUSTER.ELECTRICAL_MEASUREMENT,  {
       reportParser: value => {
-        this.log('measure_voltage value=', value);
+        // this.log('measure_voltage value=', value);
         return value;
       },
       getOpts: {
@@ -140,7 +135,6 @@ class DoublePowerPointDevice extends TuyaSpecificClusterDevice {
         pollInterval: this.minReportVoltage
       }
     });
-
   }
 
   onDeleted() {

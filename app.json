@@ -33,7 +33,7 @@
   "flow": {
     "triggers": [
       {
-        "id": "left-socket-on",
+        "id": "left_socket_is_on",
         "title": {
           "en": "Left Socket On"
         },
@@ -49,7 +49,7 @@
         ]
       },
       {
-        "id": "left-socket-off",
+        "id": "left_socket_is_off",
         "title": {
           "en": "Left Socket Off"
         },
@@ -65,7 +65,7 @@
         ]
       },
       {
-        "id": "right-socket-on",
+        "id": "right_socket_is_on",
         "title": {
           "en": "Right Socket On"
         },
@@ -81,7 +81,7 @@
         ]
       },
       {
-        "id": "right-socket-off",
+        "id": "right_socket_is_off",
         "title": {
           "en": "Right Socket Off"
         },
@@ -131,7 +131,7 @@
     ],
     "actions": [
       {
-        "id": "left_socket_on",
+        "id": "left_socket_switch_on",
         "title": {
           "en": "Switch On Left Socket"
         },
@@ -147,7 +147,7 @@
         ]
       },
       {
-        "id": "left_socket_off",
+        "id": "left_socket_switch_off",
         "title": {
           "en": "Switch Off Left Socket"
         },
@@ -163,7 +163,7 @@
         ]
       },
       {
-        "id": "right_socket_on",
+        "id": "right_socket_switch_on",
         "title": {
           "en": "Switch On Right Socket"
         },
@@ -179,7 +179,7 @@
         ]
       },
       {
-        "id": "right_socket_off",
+        "id": "right_socket_switch_off",
         "title": {
           "en": "Switch Off Right Socket"
         },

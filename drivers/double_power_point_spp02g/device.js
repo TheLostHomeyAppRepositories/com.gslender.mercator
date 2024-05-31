@@ -19,93 +19,127 @@ class DoublePowerPointDevice extends TuyaSpecificClusterDevice {
     // this.printNode();
     // console.log(zclNode.endpoints);
 
-    const { subDeviceId } = this.getData();
-    this.log('Device data: ', subDeviceId);
-
     this.meteringOffset = this.getSetting('metering_offset');
     this.measureOffset = this.getSetting('measure_offset') * 100;
     this.minReportPower = this.getSetting('minReportPower') * 1000;
     this.minReportCurrent = this.getSetting('minReportCurrent') * 1000;
     this.minReportVoltage = this.getSetting('minReportVoltage') * 1000;
 
-    if (!this.hasCapability('measure_current')) {
-      await this.addCapability('measure_current').catch(this.error);
-    }
+    await this.addCapability('measure_current').catch(this.error);
 
-    if (!this.hasCapability('measure_voltage')) {
-      await this.addCapability('measure_voltage').catch(this.error);
-    }
+    await this.addCapability('measure_voltage').catch(this.error);
 
-    try {
-      this.registerCapabilities(zclNode, {
-        endpoint: subDeviceId === 'secondSocket' ? 2 : 1,
+    await zclNode.endpoints[1].clusters.basic.readAttributes(['manufacturerName', 'zclVersion', 'appVersion', 'modelId', 'powerSource', 'attributeReportingStatus'])
+      .catch(err => {
+        this.error('Error when reading device attributes ', err);
       });
-    } catch (error) {
-      this.error('Error registering capabilities for endpoint:', error);
-    }
+    
+    try {
+			const left_socket_attributes = await zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME].readAttributes(['onOff']);
+      // this.log('left_socket_attributes.onOff',left_socket_attributes.onOff);
+      this.setCapabilityValue('left_socket', left_socket_attributes.onOff).catch(this.error);
+			const right_socket_attributes = await zclNode.endpoints[2].clusters[CLUSTER.ON_OFF.NAME].readAttributes(['onOff']);
+      // this.log('right_socket_attributes.onOff',right_socket_attributes.onOff);
+      this.setCapabilityValue('right_socket', right_socket_attributes.onOff).catch(this.error);
+		} catch (err) {
+			this.setUnavailable('Cannot reach zigbee device').catch(this.error);
+			this.error('Error in readAttributes onOff: ', err);
+		}
 
-    if (!this.isSubDevice()) {
-      await zclNode.endpoints[1].clusters.basic.readAttributes(['manufacturerName', 'zclVersion', 'appVersion', 'modelId', 'powerSource', 'attributeReportingStatus'])
-        .catch(err => {
-          this.error('Error when reading device attributes ', err);
-        });
-    }
+    let _device = this; // We're in a Device instance
 
-  }
+    // left_socket
+    this.registerCapabilityListener("left_socket", async (value, opts) => {
+      if (value) {
+        await zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME].setOn();
+      }
+      else {
+        await zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME].setOff();
+      }
+    });
+    await zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME].configureReporting({});
+    zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME].on(
+      'attr.onOff',
+      (value) => {
+        _device.setCapabilityValue("left_socket", value);
+        if (value) {
+          _device.driver.triggerLeftSocketOn(_device);
+        } else {
+          _device.driver.triggerLeftSocketOff(_device);
+        }
+      }
+    );
 
-  registerCapabilities(zclNode, options) {
-    const endpoint = options.endpoint;
 
-    // onOff
-    this.registerCapability('onoff', CLUSTER.ON_OFF, options, {
+    // right_socket
+    this.registerCapabilityListener("right_socket", async (value, opts) => {
+      if (value) {
+        await zclNode.endpoints[2].clusters[CLUSTER.ON_OFF.NAME].setOn();
+      }
+      else {
+        await zclNode.endpoints[2].clusters[CLUSTER.ON_OFF.NAME].setOff();
+      }
+    });
+    await zclNode.endpoints[2].clusters[CLUSTER.ON_OFF.NAME].configureReporting({});
+    zclNode.endpoints[2].clusters[CLUSTER.ON_OFF.NAME].on(
+      'attr.onOff',
+      (value) => {
+        _device.setCapabilityValue("right_socket", value);
+        if (value) {
+          _device.driver.triggerRightSocketOn(_device);
+        } else {
+          _device.driver.triggerRightSocketOff(_device);
+        }
+      }
+    );
+
+    await zclNode.endpoints[1].clusters[CLUSTER.ELECTRICAL_MEASUREMENT.NAME].configureReporting({});
+
+    // meter_power
+    this.registerCapability('meter_power', CLUSTER.METERING, { endpoint: 1 }, {
+      reportParser: value => (value * this.meteringOffset) / 100.0,
+      getParser: value => (value * this.meteringOffset) / 100.0,
       getOpts: {
         getOnStart: true,
-        pollInterval: 60000
+        pollInterval: 300000
       }
     });
 
-    if (endpoint === 1) {
-      // meter_power
-      this.registerCapability('meter_power', CLUSTER.METERING, options, {
-        reportParser: value => (value * this.meteringOffset) / 100.0,
-        getParser: value => (value * this.meteringOffset) / 100.0,
-        getOpts: {
-          getOnStart: true,
-          pollInterval: 300000
-        }
-      });
+    // measure_power
+    this.registerCapability('measure_power', CLUSTER.ELECTRICAL_MEASUREMENT, { endpoint: 1 }, {
+      reportParser: value => {
+        this.log('measure_power value=', value);
+        // return (value * this.measureOffset) / 100;
+        return value;
+      },
+      getOpts: {
+        getOnStart: true,
+        pollInterval: this.minReportPower
+      }
+    });
 
-      // measure_power
-      this.registerCapability('measure_power', CLUSTER.ELECTRICAL_MEASUREMENT, options, {
-        reportParser: value => {
-          return (value * this.measureOffset) / 100;
-        },
-        getOpts: {
-          getOnStart: true,
-          pollInterval: this.minReportPower
-        }
-      });
+    this.registerCapability('measure_current', CLUSTER.ELECTRICAL_MEASUREMENT, { endpoint: 1 }, {
+      reportParser: value => {
+        this.log('measure_current value=', value);
+        // return value / 1000;
+        return value;
+      },
+      getOpts: {
+        getOnStart: true,
+        pollInterval: this.minReportCurrent
+      }
+    });
 
-      this.registerCapability('measure_current', CLUSTER.ELECTRICAL_MEASUREMENT, options, {
-        reportParser: value => {
-          return value / 1000;
-        },
-        getOpts: {
-          getOnStart: true,
-          pollInterval: this.minReportCurrent
-        }
-      });
-
-      this.registerCapability('measure_voltage', CLUSTER.ELECTRICAL_MEASUREMENT, options, {
-        reportParser: value => {
-          return value;
-        },
-        getOpts: {
-          getOnStart: true,
-          pollInterval: this.minReportVoltage
-        }
-      });
-    }
+    this.registerCapability('measure_voltage', CLUSTER.ELECTRICAL_MEASUREMENT, { endpoint: 1 }, {
+      reportParser: value => {
+        this.log('measure_voltage value=', value);
+        return value;
+      },
+      getOpts: {
+        getOnStart: true,
+        pollInterval: this.minReportVoltage
+      }
+    });
 
   }
 

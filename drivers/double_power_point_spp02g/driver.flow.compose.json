@@ -1,0 +1,78 @@
+{
+    "triggers": [
+        {
+            "id": "left-socket-on",
+            "title": {
+                "en": "Left Socket On"
+            },
+            "hint": {
+                "en": "Left Socket is switched on"
+            }
+        },
+        {
+            "id": "left-socket-off",
+            "title": {
+                "en": "Left Socket Off"
+            },
+            "hint": {
+                "en": "Left Socket is switched off"
+            }
+        },
+        {
+            "id": "right-socket-on",
+            "title": {
+                "en": "Right Socket On"
+            },
+            "hint": {
+                "en": "Right Socket is switched on"
+            }
+        },
+        {
+            "id": "right-socket-off",
+            "title": {
+                "en": "Right Socket Off"
+            },
+            "hint": {
+                "en": "Right Socket is switched off"
+            }
+        }
+    ],
+    "actions": [     
+		{
+			"id": "left_socket_on",
+			"title": {
+				"en": "Switch On Left Socket"
+			},
+			"hint": {
+				"en": "This card switches on the left socket."
+			}
+		}, 
+		{
+			"id": "left_socket_off",
+			"title": {
+				"en": "Switch Off Left Socket"
+			},
+			"hint": {
+				"en": "This card switches off the left socket."
+			}
+		},
+		{
+			"id": "right_socket_on",
+			"title": {
+				"en": "Switch On Right Socket"
+			},
+			"hint": {
+				"en": "This card switches on the right socket."
+			}
+		}, 
+		{
+			"id": "right_socket_off",
+			"title": {
+				"en": "Switch Off Right Socket"
+			},
+			"hint": {
+				"en": "This card switches off the right socket."
+			}
+		}
+    ]
+}

@@ -31,11 +31,6 @@ class FanLightDevice extends ZigBeeDevice {
     // this.printNode();
     // debug(true);
 
-    const switchFanToAction = this.homey.flow.getActionCard('switch-fan-to');
-    switchFanToAction.registerRunListener(async (args, state) => {
-      await zclNode.endpoints[1].clusters[IkuuFanSpeedCluster.NAME].writeAttributes({ speed: getSpeedValue(args) });
-    });
-
     this.registerCapability("onoff", CLUSTER.ON_OFF, {
       reportOpts: {
         configureAttributeReporting: {

@@ -4,7 +4,8 @@
   },
   "class": "socket",
   "capabilities": [
-    "onoff", 
+    "left_socket",
+    "right_socket",
     "measure_power",
     "meter_power",
     "measure_current",
@@ -20,23 +21,12 @@
     "productId": ["TS011F"],
     "endpoints": {
       "1": {
-        "clusters": [0, 4, 5, 6, 1794, 2820],
-        "bindings": [6, 1794, 2820]
+        "clusters": [0, 3, 4, 5, 6, 1794, 2820,61184],
+        "bindings": [10,25]
       },
       "2": {
-        "clusters": [6],
-        "bindings": [6]
-      }
-    },
-    "devices": {
-      "secondSocket": {
-        "class": "socket",
-        "capabilities": [
-          "onoff"
-        ],
-        "name": {
-          "en": "Double Power Point"
-        }
+        "clusters": [3, 4, 5, 6, 61184],
+        "bindings": []
       }
     }
   },

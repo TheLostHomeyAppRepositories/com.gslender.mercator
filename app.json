@@ -9,7 +9,7 @@
     "local"
   ],
   "name": {
-    "en": "Mercator Ikuü"
+    "en": "Mercator Ikuu"
   },
   "description": {
     "en": "There has never been a better time to automate your home."
@@ -30,6 +30,221 @@
   "bugs": {
     "url": "https://github.com/gslender/com.gslender.mercator/issues"
   },
+  "flow": {
+    "triggers": [
+      {
+        "id": "left-socket-on",
+        "title": {
+          "en": "Left Socket On"
+        },
+        "hint": {
+          "en": "Left Socket is switched on"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=double_power_point_spp02g"
+          }
+        ]
+      },
+      {
+        "id": "left-socket-off",
+        "title": {
+          "en": "Left Socket Off"
+        },
+        "hint": {
+          "en": "Left Socket is switched off"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=double_power_point_spp02g"
+          }
+        ]
+      },
+      {
+        "id": "right-socket-on",
+        "title": {
+          "en": "Right Socket On"
+        },
+        "hint": {
+          "en": "Right Socket is switched on"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=double_power_point_spp02g"
+          }
+        ]
+      },
+      {
+        "id": "right-socket-off",
+        "title": {
+          "en": "Right Socket Off"
+        },
+        "hint": {
+          "en": "Right Socket is switched off"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=double_power_point_spp02g"
+          }
+        ]
+      },
+      {
+        "id": "fan-on",
+        "title": {
+          "en": "Fan On"
+        },
+        "hint": {
+          "en": "Fan is switched on"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan_light_sswf01g"
+          }
+        ]
+      },
+      {
+        "id": "fan-off",
+        "title": {
+          "en": "Fan Off"
+        },
+        "hint": {
+          "en": "Fan is switched off"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan_light_sswf01g"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "left_socket_on",
+        "title": {
+          "en": "Switch On Left Socket"
+        },
+        "hint": {
+          "en": "This card switches on the left socket."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=double_power_point_spp02g"
+          }
+        ]
+      },
+      {
+        "id": "left_socket_off",
+        "title": {
+          "en": "Switch Off Left Socket"
+        },
+        "hint": {
+          "en": "This card switches off the left socket."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=double_power_point_spp02g"
+          }
+        ]
+      },
+      {
+        "id": "right_socket_on",
+        "title": {
+          "en": "Switch On Right Socket"
+        },
+        "hint": {
+          "en": "This card switches on the right socket."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=double_power_point_spp02g"
+          }
+        ]
+      },
+      {
+        "id": "right_socket_off",
+        "title": {
+          "en": "Switch Off Right Socket"
+        },
+        "hint": {
+          "en": "This card switches off the right socket."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=double_power_point_spp02g"
+          }
+        ]
+      },
+      {
+        "id": "switch-fan-to",
+        "title": {
+          "en": "Switch Fan To"
+        },
+        "titleFormatted": {
+          "en": "Switch Fan To [[Speed]]"
+        },
+        "hint": {
+          "en": "Switch the Fan to..."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan_light_sswf01g"
+          },
+          {
+            "type": "dropdown",
+            "name": "Speed",
+            "values": [
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "high",
+                "label": {
+                  "en": "High"
+                }
+              },
+              {
+                "id": "medium",
+                "label": {
+                  "en": "Medium"
+                }
+              },
+              {
+                "id": "low",
+                "label": {
+                  "en": "Low"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "drivers": [
     {
       "name": {
@@ -37,7 +252,8 @@
       },
       "class": "socket",
       "capabilities": [
-        "onoff",
+        "left_socket",
+        "right_socket",
         "measure_power",
         "meter_power",
         "measure_current",
@@ -57,36 +273,28 @@
           "1": {
             "clusters": [
               0,
+              3,
               4,
               5,
               6,
               1794,
-              2820
+              2820,
+              61184
             ],
             "bindings": [
-              6,
-              1794,
-              2820
+              10,
+              25
             ]
           },
           "2": {
             "clusters": [
-              6
+              3,
+              4,
+              5,
+              6,
+              61184
             ],
-            "bindings": [
-              6
-            ]
-          }
-        },
-        "devices": {
-          "secondSocket": {
-            "class": "socket",
-            "capabilities": [
-              "onoff"
-            ],
-            "name": {
-              "en": "Double Power Point"
-            }
+            "bindings": []
           }
         }
       },
@@ -493,93 +701,6 @@
       "id": "triple_light_switch_ssw03"
     }
   ],
-  "flow": {
-    "triggers": [
-      {
-        "id": "fan-on",
-        "title": {
-          "en": "Fan On"
-        },
-        "hint": {
-          "en": "Fan is switched on"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=fan_light_sswf01g"
-          }
-        ]
-      },
-      {
-        "id": "fan-off",
-        "title": {
-          "en": "Fan Off"
-        },
-        "hint": {
-          "en": "Fan is switched off"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=fan_light_sswf01g"
-          }
-        ]
-      }
-    ],
-    "actions": [
-      {
-        "id": "switch-fan-to",
-        "title": {
-          "en": "Switch Fan To"
-        },
-        "titleFormatted": {
-          "en": "Switch Fan To [[Speed]]"
-        },
-        "hint": {
-          "en": "Switch the Fan to..."
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=fan_light_sswf01g"
-          },
-          {
-            "type": "dropdown",
-            "name": "Speed",
-            "values": [
-              {
-                "id": "off",
-                "label": {
-                  "en": "Off"
-                }
-              },
-              {
-                "id": "high",
-                "label": {
-                  "en": "High"
-                }
-              },
-              {
-                "id": "medium",
-                "label": {
-                  "en": "Medium"
-                }
-              },
-              {
-                "id": "low",
-                "label": {
-                  "en": "Low"
-                }
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
   "capabilities": {
     "fanspeed": {
       "type": "enum",
@@ -622,6 +743,24 @@
       "setable": true,
       "uiComponent": "picker",
       "uiQuickAction": true
+    },
+    "left_socket": {
+      "type": "boolean",
+      "getable": true,
+      "setable": true,
+      "uiComponent": "button",
+      "title": {
+        "en": "Left Socket"
+      }
+    },
+    "right_socket": {
+      "type": "boolean",
+      "getable": true,
+      "setable": true,
+      "uiComponent": "button",
+      "title": {
+        "en": "Right Socket"
+      }
     }
   }
 }

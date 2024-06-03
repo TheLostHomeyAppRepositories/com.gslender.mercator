@@ -10,5 +10,8 @@
   },
   "1.1.1": {
     "en": "Fixed Double Power Point to use two buttons; corrected Fan Light to register only 1 action card in driver"
+  },
+  "1.1.2": {
+    "en": "Added Twin Light Switch"
   }
 }

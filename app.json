@@ -699,6 +699,67 @@
         "small": "/drivers/triple_light_switch_ssw03/assets/images/small.png"
       },
       "id": "triple_light_switch_ssw03"
+    },
+    {
+      "name": {
+        "en": "Twin Light Switch"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "_TZ3000_4zf0crgo",
+        "productId": [
+          "TS0012"
+        ],
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              25,
+              10
+            ]
+          },
+          "2": {
+            "clusters": [
+              3,
+              4,
+              5,
+              6
+            ],
+            "bindings": []
+          }
+        },
+        "devices": {
+          "secondLight": {
+            "class": "light",
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Twin Light Switch"
+            }
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "images": {
+        "large": "/drivers/twin_light_switch_ssw02/assets/images/large.png",
+        "small": "/drivers/twin_light_switch_ssw02/assets/images/small.png"
+      },
+      "id": "twin_light_switch_ssw02"
     }
   ],
   "capabilities": {

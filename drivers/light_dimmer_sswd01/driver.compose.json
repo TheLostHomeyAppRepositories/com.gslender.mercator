@@ -9,6 +9,10 @@
   ],  
   "capabilitiesOptions": {
     "dim": {
+      "min" : 0,
+      "max" : 1,
+      "decimals" : 2,
+      "step" : 0.01,
       "opts": {
         "duration": true
       }

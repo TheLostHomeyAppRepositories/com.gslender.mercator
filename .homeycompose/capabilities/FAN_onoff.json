@@ -1,0 +1,9 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Fan"
+  },
+  "getable": true,
+  "setable": true
+}
+

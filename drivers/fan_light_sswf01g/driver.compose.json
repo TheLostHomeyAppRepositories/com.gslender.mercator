@@ -4,7 +4,9 @@
   },
   "class": "fan",
   "capabilities": [
-    "onoff", "fanspeed"
+    "LIGHT_onoff", 
+    "FAN_onoff", 
+    "fanspeed"
   ],  
   "zigbee": {
     "manufacturerName": "_TZ3210_lzqq3u4r",

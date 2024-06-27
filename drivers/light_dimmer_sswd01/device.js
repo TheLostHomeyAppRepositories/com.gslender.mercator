@@ -28,11 +28,12 @@ class LightDimmerDevice extends TuyaSpecificClusterDevice {
     });
 
     this.registerCapabilityListener('dim', async value => {
-      // this.log("dim: ", value * 1000);
-      await this.writeData32(2, value * 1000);
+      const convertedValue = value * 1000;
+      this.log(`dim: ${value} ${convertedValue}`);
+      await this.writeData32(2, convertedValue);
     });
 
-    const datapoint = await zclNode.endpoints[1].clusters[TuyaSpecificCluster.NAME].readAttributes(['commandDataResponse', 'commandDataReport']);
+    // const datapoint = await zclNode.endpoints[1].clusters[TuyaSpecificCluster.NAME].readAttributes(['commandDataResponse', 'commandDataReport']);
     // this.log('>>>>>datapoint', datapoint);
 
 
@@ -57,7 +58,15 @@ class LightDimmerDevice extends TuyaSpecificClusterDevice {
         if (value.dp === 3) {
           const corrected_minlevel = value.data.readUInt32BE(0) / 1000.0;
           this.log(">>>tuya.minlevel", corrected_minlevel);
-          // await _device.setCapabilityOptions("dim", { "min": //corrected_minlevel });
+          await _device.setCapabilityOptions("dim", {
+            "min": corrected_minlevel,
+            "max": 1,
+            "decimals": 2,
+            "step": 0.01,
+            "opts": {
+              "duration": true
+            }
+          });
           return;
         }
         if (value.dp === 6) return; // unknown !?

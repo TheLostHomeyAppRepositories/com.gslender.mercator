@@ -38,7 +38,6 @@ class DoublePowerPointDevice extends ZigBeeDevice {
       // this.log('right_socket_attributes.onOff',right_socket_attributes.onOff);
       this.setCapabilityValue('right_socket', right_socket_attributes.onOff).catch(this.error);
 		} catch (err) {
-			this.setUnavailable('Cannot reach zigbee device').catch(this.error);
 			this.error('Error in readAttributes onOff: ', err);
 		}
 

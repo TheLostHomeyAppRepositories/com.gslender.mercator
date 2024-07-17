@@ -1,0 +1,83 @@
+{
+  "name": {
+    "en": "Five Light Switch"
+  },
+  "class": "light",
+  "capabilities": [
+    "onoff"
+  ], 
+  "zigbee": {
+    "manufacturerName": "_TZ3210_paaaaa",
+    "productId": ["TS0015"],
+    "endpoints": {
+      "1": {
+        "clusters": [0, 4, 5, 6],
+        "bindings": [6]
+      },
+      "2": {
+        "clusters": [6],
+        "bindings": [6]
+      },
+      "3": {
+        "clusters": [6],
+        "bindings": [6]
+      },
+      "4": {
+        "clusters": [6],
+        "bindings": [6]
+      },
+      "5": {
+        "clusters": [6],
+        "bindings": [6]
+      }
+    },
+    "devices": {
+      "secondLight": {
+        "class": "light",
+        "capabilities": [
+          "onoff"
+        ],
+        "name": {
+          "en": "Five Light Switch"
+        }
+      },
+      "thirdLight": {
+        "class": "light",
+        "capabilities": [
+          "onoff"
+        ],
+        "name": {
+          "en": "Five Light Switch"
+        }
+      },
+      "fourthLight": {
+        "class": "light",
+        "capabilities": [
+          "onoff"
+        ],
+        "name": {
+          "en": "Five Light Switch"
+        }
+      },
+      "fifthLight": {
+        "class": "light",
+        "capabilities": [
+          "onoff"
+        ],
+        "name": {
+          "en": "Five Light Switch"
+        }
+      }
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "zigbee"
+  ],
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  }
+}

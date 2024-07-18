@@ -7,8 +7,14 @@
     "onoff"
   ], 
   "zigbee": {
-    "manufacturerName": "_TZ3000_4zf0crgo",
-    "productId": ["TS0012"],
+    "manufacturerName": [
+      "_TZ3000_4zf0crgo",
+      "_TZ3000_75yxazam"
+    ],
+    "productId": [
+      "TS0012",
+      "TS0002"
+    ],
     "endpoints": {
       "1": {
         "clusters": [0, 3, 4, 5, 6],

@@ -22,5 +22,11 @@
   },
   "1.1.5": {
     "en": "Added five light switch"
+  },
+  "1.1.6": {
+    "en": "Added correct fingerprint for Five Light Switch"
+  },
+  "1.1.7": {
+    "en": "fixed ZB signatures for missing devices"
   }
 }

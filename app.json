@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.gslender.mercator",
-  "version": "1.1.5",
+  "version": "1.1.7",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#dab30c",
@@ -447,9 +447,9 @@
         "onoff"
       ],
       "zigbee": {
-        "manufacturerName": "_TZ3210_paaaaa",
+        "manufacturerName": "_TZE200_leaqthqq",
         "productId": [
-          "TS0015"
+          "TS0601"
         ],
         "endpoints": {
           "1": {
@@ -709,9 +709,13 @@
         "onoff"
       ],
       "zigbee": {
-        "manufacturerName": "_TZ3000_l8fsgo6p",
+        "manufacturerName": [
+          "_TZ3000_l8fsgo6p",
+          "_TZ3000_kvdusqqe"
+        ],
         "productId": [
-          "TS0011"
+          "TS0011",
+          "TS0001"
         ],
         "endpoints": {
           "1": {
@@ -748,9 +752,13 @@
         "onoff"
       ],
       "zigbee": {
-        "manufacturerName": "_TZ3000_khtlvdfc",
+        "manufacturerName": [
+          "_TZ3000_khtlvdfc",
+          "_TZ3000_voeqwhvq"
+        ],
         "productId": [
-          "TS0013"
+          "TS0013",
+          "TS0003"
         ],
         "endpoints": {
           "1": {
@@ -823,9 +831,13 @@
         "onoff"
       ],
       "zigbee": {
-        "manufacturerName": "_TZ3000_4zf0crgo",
+        "manufacturerName": [
+          "_TZ3000_4zf0crgo",
+          "_TZ3000_75yxazam"
+        ],
         "productId": [
-          "TS0012"
+          "TS0012",
+          "TS0002"
         ],
         "endpoints": {
           "1": {

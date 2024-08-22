@@ -34,5 +34,8 @@
   },
   "1.1.9": {
     "en": "Possible five light Tuya DP fix"
+  },
+  "1.1.10": {
+    "en": "Added more socket devices"
   }
 }

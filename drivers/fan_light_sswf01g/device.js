@@ -31,16 +31,16 @@ class FanLightDevice extends ZigBeeDevice {
     // this.printNode();
     // debug(true);
 
-    this.removeCapability('onoff');
-    this.addCapability('FAN_onoff');
-    this.addCapability('LIGHT_onoff');
+    await this.removeCapability('FAN_onoff');
+    await this.removeCapability('LIGHT_onoff');
 
+    await this.addCapability('onoff');
 
-    this.registerCapabilityListener("FAN_onoff", async (value, opts) => {
-      await zclNode.endpoints[1].clusters[IkuuFanSpeedCluster.NAME].writeAttributes({ speed: value ? 2 : 0 });
-    });
+    // this.registerCapabilityListener("FAN_onoff", async (value, opts) => {
+    //   await zclNode.endpoints[1].clusters[IkuuFanSpeedCluster.NAME].writeAttributes({ speed: value ? 2 : 0 });
+    // });
 
-    this.registerCapabilityListener("LIGHT_onoff", async (value, opts) => {
+    this.registerCapabilityListener("onoff", async (value, opts) => {
       if (value) {
         await zclNode.endpoints[1].clusters.onOff.setOn();
       } else {
@@ -69,7 +69,7 @@ class FanLightDevice extends ZigBeeDevice {
     });
 
     zclNode.endpoints[1].clusters.onOff.on('attr.onOff', value => {
-      _device.setCapabilityValue("LIGHT_onoff", value);
+      _device.setCapabilityValue("onoff", value);
     });
 
     zclNode.endpoints[1].clusters[IkuuFanSpeedCluster.NAME].on(
@@ -78,9 +78,7 @@ class FanLightDevice extends ZigBeeDevice {
         _device.setCapabilityValue("fanspeed", value);
         if (value === 'off') {
           _device.driver.triggerFanOff(_device);
-          _device.setCapabilityValue("FAN_onoff", false);
         } else {
-          _device.setCapabilityValue("FAN_onoff", true);
           _device.driver.triggerFanOn(_device);
         }
       }

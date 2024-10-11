@@ -4,8 +4,7 @@
   },
   "class": "fan",
   "capabilities": [
-    "LIGHT_onoff", 
-    "FAN_onoff", 
+    "onoff", 
     "fanspeed"
   ],  
   "zigbee": {

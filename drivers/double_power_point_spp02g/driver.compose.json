@@ -17,7 +17,11 @@
     }
   },
   "zigbee": {
-    "manufacturerName": ["_TZ3210_pfbzs1an","_TZ3210_7jnk7l3k"],
+    "manufacturerName": [
+      "_TZ3210_pfbzs1an",
+      "_TZ3210_7jnk7l3k",
+      "_TZ3210_raqjcxo5"
+    ],
     "productId": ["TS011F"],
     "endpoints": {
       "1": {

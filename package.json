@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {},
   "devDependencies": {
-    "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.8"
+    "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.10"
   },
   "dependencies": {
     "homey-zigbeedriver": "^2.1.4",
